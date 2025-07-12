@@ -13,6 +13,30 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  
+  backup:
+    build:
+      context: maintenance
+      dockerfile: Dockerfile
+    image: jliotorresmoreno/odoo-backup:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "4080:8080"
+    volumes:
+      - backup_data:/backup
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      ODOO_BACKUP_FORMAT: ${ODOO_BACKUP_FORMAT}
+      ODOO_BACKUP_PATH: ${ODOO_BACKUP_PATH}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_URL: ${ADMIN_URL}
+    restart: unless-stopped
 
   service:
     build:
@@ -26,8 +50,8 @@ services:
       - "8069:8069"
       - "8072:8072"
     environment:
-      HOST: db
-      PORT: 5432
+      HOST: ${POSTGRES_HOST}
+      PORT: ${POSTGRES_PORT}
       USER: ${POSTGRES_USER}
       PASSWORD: ${POSTGRES_PASSWORD}
       DB_NAME: ${POSTGRES_DB}
@@ -60,8 +84,8 @@ services:
       - "18069:8069"
       - "18072:8072"
     environment:
-      HOST: db
-      PORT: 5432
+      HOST: ${POSTGRES_HOST}
+      PORT: ${POSTGRES_PORT}
       USER: ${POSTGRES_USER}
       PASSWORD: ${POSTGRES_PASSWORD}
       DB_NAME: ${POSTGRES_DB}
@@ -83,6 +107,12 @@ services:
     restart: unless-stopped
 
 volumes:
+  backup_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./backup
+      o: bind
   db_data:
   odoo_data:
   odoo_custom_addons:
