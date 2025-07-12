@@ -4,5 +4,8 @@ set -e
 
 chown -R odoo:odoo /var/lib/odoo
 
+envsubst < /odoo/odoo.conf.template > /odoo/odoo.conf
+
 # Ejecutar como usuario odoo y activar entorno virtual
-exec gosu odoo bash -c "source /venv/bin/activate && ./odoo-bin --config=/odoo/odoo.conf"
+source /venv/bin/activate
+./odoo-bin --config=/odoo/odoo.conf
