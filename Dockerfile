@@ -1,7 +1,10 @@
 FROM ubuntu:24.04
 
+LABEL maintainer="juliotorres"
+
 RUN apt-get update && apt dist-upgrade -y && apt-get install -y \
     build-essential \
+    curl \
     gettext \
     gnupg2 \
     gosu \
@@ -18,6 +21,13 @@ RUN apt-get update && apt dist-upgrade -y && apt-get install -y \
     python3-pip \
     software-properties-common \
     wget && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+
+RUN apt-get update && apt-get install -y \
+    postgresql-client-17 && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /odoo

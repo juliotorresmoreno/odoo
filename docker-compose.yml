@@ -50,10 +50,10 @@ services:
       - "8069:8069"
       - "8072:8072"
     environment:
-      HOST: ${POSTGRES_HOST}
-      PORT: ${POSTGRES_PORT}
-      USER: ${POSTGRES_USER}
-      PASSWORD: ${POSTGRES_PASSWORD}
+      PGHOST: ${POSTGRES_HOST}
+      PGPORT: ${POSTGRES_PORT}
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
       DB_NAME: ${POSTGRES_DB}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       WORKERS: ${WORKERS}
@@ -84,10 +84,10 @@ services:
       - "18069:8069"
       - "18072:8072"
     environment:
-      HOST: ${POSTGRES_HOST}
-      PORT: ${POSTGRES_PORT}
-      USER: ${POSTGRES_USER}
-      PASSWORD: ${POSTGRES_PASSWORD}
+      PGHOST: ${POSTGRES_HOST}
+      PGPORT: ${POSTGRES_PORT}
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
       DB_NAME: ${POSTGRES_DB}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       WORKERS: ${WORKERS}
@@ -105,6 +105,28 @@ services:
       - odoo_data:/var/lib/odoo
       - odoo_custom_addons:/opt/odoo/custom_addons
     restart: unless-stopped
+
+  odoo-permissions:
+    image: busybox
+    command: >
+      sh -c "chown -R 1000:1000 /var/lib/odoo"
+    volumes:
+      - odoo_data:/var/lib/odoo
+    restart: "no"
+    deploy:
+      replicas: 1
+    user: root
+
+  backup-permissions:
+    image: busybox
+    command: >
+      sh -c "chown -R 1000:1000 /backup"
+    volumes:
+      - backup_data:/backup
+    restart: "no"
+    deploy:
+      replicas: 1
+    user: root
 
 volumes:
   backup_data:

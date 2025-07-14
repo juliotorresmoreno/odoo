@@ -1,9 +1,9 @@
 [options]
 admin_passwd = ${ADMIN_PASSWORD}
-db_host = ${HOST}
-db_port = ${PORT}
-db_user = ${USER}
-db_password = ${PASSWORD}
+db_host = ${PGHOST}
+db_port = ${PGPORT}
+db_user = ${PGUSER}
+db_password = ${PGPASSWORD}
 db_filter = ^%d$
 list_db = ${LIST_DB}
 addons_path = /odoo/addons,/odoo/odoo/addons,/odoo/custom_addons
