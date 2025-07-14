@@ -33,9 +33,6 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /odoo
 WORKDIR /odoo
 
-RUN addgroup --system odoo
-RUN adduser --system --ingroup odoo --home /var/lib/odoo --shell /bin/false odoo
-
 COPY requirements.txt /odoo/requirements.txt
 
 RUN python3 -m venv /venv && \
@@ -43,15 +40,15 @@ RUN python3 -m venv /venv && \
     pip3 install --upgrade pip setuptools wheel && \
     pip3 install -r requirements.txt
 
-RUN chown -R odoo:odoo /odoo && chmod -R 755 /odoo
-USER odoo
+RUN chown -R ubuntu:ubuntu /odoo && chmod -R 755 /odoo
+USER ubuntu
 
 COPY . /odoo
 
 USER root
 RUN chmod +x /odoo/entrypoint.sh
 
-USER odoo
+USER ubuntu
 ENTRYPOINT ["/odoo/entrypoint.sh"]
 
 EXPOSE 8069

@@ -15,18 +15,16 @@ COPY go.mod /app
 COPY go.sum /app
 WORKDIR /app
 RUN go mod download
-RUN addgroup --system odoo
-RUN adduser --system --ingroup odoo --home /var/lib/odoo --shell /bin/false odoo
 
 COPY *.go /app
 
 RUN go build -o /app/main
 RUN rm -rf /app/*.go
-RUN chown -R odoo:odoo /app && chmod -R 755 /app
+RUN chown -R ubuntu:ubuntu /app && chmod -R 755 /app
 
 RUN chmod +x /app/main
 
-USER odoo
+USER ubuntu
 
 EXPOSE 8080
 

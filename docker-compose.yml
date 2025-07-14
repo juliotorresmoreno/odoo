@@ -22,6 +22,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      permissions-fix:
+        condition: service_completed_successfully
     ports:
       - "4080:8080"
     volumes:
@@ -46,6 +48,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      permissions-fix:
+        condition: service_completed_successfully
     ports:
       - "8069:8069"
       - "8072:8072"
@@ -80,6 +84,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      permissions-fix:
+        condition: service_completed_successfully
     ports:
       - "18069:8069"
       - "18072:8072"
@@ -106,26 +112,14 @@ services:
       - odoo_custom_addons:/opt/odoo/custom_addons
     restart: unless-stopped
 
-  odoo-permissions:
+  permissions-fix:
     image: busybox
     command: >
-      sh -c "chown -R 1000:1000 /var/lib/odoo"
+      sh -c "chown -R 1000:1000 /var/lib/odoo && chown -R 1000:1000 /backup"
     volumes:
       - odoo_data:/var/lib/odoo
-    restart: "no"
-    deploy:
-      replicas: 1
-    user: root
-
-  backup-permissions:
-    image: busybox
-    command: >
-      sh -c "chown -R 1000:1000 /backup"
-    volumes:
       - backup_data:/backup
     restart: "no"
-    deploy:
-      replicas: 1
     user: root
 
 volumes:
