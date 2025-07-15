@@ -3,9 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"path"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -45,6 +47,12 @@ func DownloadBackup(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, filePath)
 }
 
+type Backup struct {
+	Name      string `json:"name"`
+	Size      int64  `json:"size"`
+	CreatedAt string `json:"createdAt"`
+}
+
 func ScanBackupDirectory(w http.ResponseWriter, r *http.Request) {
 	OutputDir := os.Getenv("ODOO_BACKUP_PATH")
 	dbName := mux.Vars(r)["dbname"]
@@ -59,10 +67,20 @@ func ScanBackupDirectory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var backups []string
+	var backups []Backup
 	for _, path := range paths {
 		if !path.IsDir() && path.Name() != "README.md" {
-			backups = append(backups, path.Name())
+			stats, err := path.Info()
+			if err != nil {
+				log.Printf("Error getting file info for %s: %v", path.Name(), err)
+				continue
+			}
+
+			backups = append(backups, Backup{
+				Name:      path.Name(),
+				Size:      stats.Size(),
+				CreatedAt: stats.ModTime().Format(time.RFC3339),
+			})
 		}
 	}
 
