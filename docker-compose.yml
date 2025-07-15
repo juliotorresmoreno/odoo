@@ -25,7 +25,7 @@ services:
       permissions-fix:
         condition: service_completed_successfully
     ports:
-      - "4080:8080"
+      - "0.0.0.0:4080:8080" # Binds to IPv4 only
     volumes:
       - backup_data:/backup
     environment:
@@ -51,8 +51,8 @@ services:
       permissions-fix:
         condition: service_completed_successfully
     ports:
-      - "8069:8069"
-      - "8072:8072"
+      - "0.0.0.0:8069:8069" # Binds to IPv4 only
+      - "0.0.0.0:8072:8072" # Binds to IPv4 only
     environment:
       PGHOST: ${POSTGRES_HOST}
       PGPORT: ${POSTGRES_PORT}
@@ -87,8 +87,8 @@ services:
       permissions-fix:
         condition: service_completed_successfully
     ports:
-      - "18069:8069"
-      - "18072:8072"
+      - "0.0.0.0:18069:8069" # Binds to IPv4 only
+      - "0.0.0.0:18072:8072" # Binds to IPv4 only
     environment:
       PGHOST: ${POSTGRES_HOST}
       PGPORT: ${POSTGRES_PORT}
