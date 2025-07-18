@@ -6,6 +6,7 @@ spec:
   type: LoadBalancer
   selector:
     app: odoo
+    role: service
   ports:
     - port: 8069
       targetPort: 8069

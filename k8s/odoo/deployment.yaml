@@ -3,14 +3,16 @@ kind: Deployment
 metadata:
   name: odoo
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: odoo
+      role: service
   template:
     metadata:
       labels:
         app: odoo
+        role: service
     spec:
       automountServiceAccountToken: false
       securityContext:
