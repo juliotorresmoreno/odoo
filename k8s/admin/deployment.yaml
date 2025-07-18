@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo
+      role: admin
+  template:
+    metadata:
+      labels:
+        app: odoo
+        role: admin
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: odoo
+          image: jliotorresmoreno/odoo:18.0
+          ports:
+            - containerPort: 8069
+            - containerPort: 8072
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+              ephemeral-storage: "4Gi"
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+              ephemeral-storage: "2Gi"
+          env:
+            - name: WORKERS
+              value: "2"
+            - name: LIST_DB
+              value: "True"
+          envFrom:
+            - configMapRef:
+                name: odoo-config
+            - secretRef:
+                name: odoo-secret
+          volumeMounts:
+            - name: odoo-data
+              mountPath: /var/lib/odoo
+            - name: odoo-custom-addons
+              mountPath: /opt/odoo/custom_addons
+      volumes:
+        - name: odoo-data
+          persistentVolumeClaim:
+            claimName: odoo-data
+        - name: odoo-custom-addons
+          persistentVolumeClaim:
+            claimName: odoo-custom-addons

@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  ADMIN_URL: http://admin:8069
+  GEVENT_PORT: "8072"
+  HTTP_PORT: "8069"
+  LIMIT_MEMORY_HARD: "2147483648"
+  LIMIT_MEMORY_SOFT: "1717986918"
+  LIMIT_TIME_CPU: "600"
+  LIMIT_TIME_REAL: "1200"
+  LIST_DB: "False"
+  LOG_LEVEL: info
+  LONGPOLLING_INTERVAL: "35"
+  MAX_REQUESTS: "8192"
+  ODOO_BACKUP_FORMAT: zip
+  ODOO_BACKUP_PATH: /backup
+  WORKERS: "17"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: odoo-config

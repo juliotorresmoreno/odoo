@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo
+  template:
+    metadata:
+      labels:
+        app: odoo
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: odoo
+          image: jliotorresmoreno/odoo:18.0
+          ports:
+            - containerPort: 8069
+            - containerPort: 8072
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+              ephemeral-storage: "4Gi"
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+              ephemeral-storage: "2Gi"
+          envFrom:
+            - configMapRef:
+                name: odoo-config
+            - secretRef:
+                name: odoo-secret
+          volumeMounts:
+            - name: odoo-data
+              mountPath: /var/lib/odoo
+            - name: odoo-custom-addons
+              mountPath: /opt/odoo/custom_addons
+      volumes:
+        - name: odoo-data
+          persistentVolumeClaim:
+            claimName: odoo-data
+        - name: odoo-custom-addons
+          persistentVolumeClaim:
+            claimName: odoo-custom-addons

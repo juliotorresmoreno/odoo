@@ -18,7 +18,7 @@ services:
     build:
       context: maintenance
       dockerfile: Dockerfile
-    image: jliotorresmoreno/odoo-backup:latest
+    image: jliotorresmoreno/odoo-backup:18.0
     depends_on:
       db:
         condition: service_healthy
@@ -44,7 +44,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: jliotorresmoreno/odoo:latest
+    image: jliotorresmoreno/odoo:18.0
     depends_on:
       db:
         condition: service_healthy
@@ -80,7 +80,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: jliotorresmoreno/odoo:latest
+    image: jliotorresmoreno/odoo:18.0
     depends_on:
       db:
         condition: service_healthy
