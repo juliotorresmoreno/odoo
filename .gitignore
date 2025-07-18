@@ -52,3 +52,4 @@ package.json
 
 custom_addons/
 backup/
+k8s/config/
