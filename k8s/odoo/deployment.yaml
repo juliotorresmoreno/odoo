@@ -13,6 +13,10 @@ spec:
         app: odoo
     spec:
       automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: odoo
           image: jliotorresmoreno/odoo:18.0
