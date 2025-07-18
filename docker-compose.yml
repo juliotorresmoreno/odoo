@@ -13,32 +13,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  
-  backup:
-    build:
-      context: maintenance
-      dockerfile: Dockerfile
-    image: jliotorresmoreno/odoo-backup:18.0
-    depends_on:
-      db:
-        condition: service_healthy
-      permissions-fix:
-        condition: service_completed_successfully
-    ports:
-      - "0.0.0.0:4080:8080" # Binds to IPv4 only
-    volumes:
-      - backup_data:/backup
-    environment:
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      ODOO_BACKUP_FORMAT: ${ODOO_BACKUP_FORMAT}
-      ODOO_BACKUP_PATH: ${ODOO_BACKUP_PATH}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-      ADMIN_URL: ${ADMIN_URL}
-    restart: unless-stopped
 
   service:
     build:
