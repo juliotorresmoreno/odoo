@@ -23,7 +23,7 @@ spec:
         - name: odoo
           image: jliotorresmoreno/odoo:18.0
           ports:
-            - containerPort: 8072
+            - containerPort: 8069
           resources:
             limits:
               cpu: "1"

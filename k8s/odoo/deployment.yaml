@@ -24,7 +24,6 @@ spec:
           image: jliotorresmoreno/odoo:18.0
           ports:
             - containerPort: 8069
-            - containerPort: 8072
           resources:
             limits:
               cpu: "1"

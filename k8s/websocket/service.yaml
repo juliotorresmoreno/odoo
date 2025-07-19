@@ -7,7 +7,7 @@ spec:
     app: odoo
     role: websocket
   ports:
-    - name: longpolling
+    - name: websocket
       port: 8072
-      targetPort: 8072
+      targetPort: 8069
   type: ClusterIP
