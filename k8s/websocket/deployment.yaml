@@ -22,6 +22,7 @@ spec:
       containers:
         - name: odoo
           image: jliotorresmoreno/odoo:18.0
+          imagePullPolicy: Always
           ports:
             - containerPort: 8069
           resources:
