@@ -27,8 +27,8 @@ spec:
             - containerPort: 8069
           resources:
             limits:
-              cpu: "1"
-              memory: "2Gi"
+              cpu: "16"
+              memory: "8Gi"
               ephemeral-storage: "4Gi"
             requests:
               cpu: "500m"
@@ -36,7 +36,7 @@ spec:
               ephemeral-storage: "2Gi"
           env:
             - name: WORKERS
-              value: "0"
+              value: "1"
             - name: LIST_DB
               value: "True"
           envFrom:
