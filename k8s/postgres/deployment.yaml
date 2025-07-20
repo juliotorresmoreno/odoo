@@ -20,18 +20,17 @@ spec:
       containers:
         - name: postgres
           image: postgres:17
-          imagePullPolicy: Always
           ports:
             - containerPort: 5432
           resources:
-            requests:
-              cpu: "500m"
-              memory: "2Gi"
-              ephemeral-storage: "5Gi"
             limits:
               cpu: "16"
+              memory: "8Gi"
+              ephemeral-storage: "4Gi"
+            requests:
+              cpu: "4"
               memory: "4Gi"
-              ephemeral-storage: "10Gi"
+              ephemeral-storage: "4Gi"
           env:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata

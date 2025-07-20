@@ -31,9 +31,9 @@ spec:
               memory: "8Gi"
               ephemeral-storage: "4Gi"
             requests:
-              cpu: "500m"
-              memory: "1Gi"
-              ephemeral-storage: "2Gi"
+              cpu: "4"
+              memory: "4Gi"
+              ephemeral-storage: "4Gi"
           env:
             - name: WORKERS
               value: "1"

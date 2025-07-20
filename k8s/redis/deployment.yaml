@@ -19,14 +19,14 @@ spec:
           ports:
             - containerPort: 6379
           resources:
-            requests:
-              memory: "256Mi"
-              cpu: "100m"
-              ephemeral-storage: "128Mi"
             limits:
-              memory: "512Mi"
-              cpu: "200m"
-              ephemeral-storage: "256Mi"
+              cpu: "16"
+              memory: "8Gi"
+              ephemeral-storage: "4Gi"
+            requests:
+              cpu: "4"
+              memory: "4Gi"
+              ephemeral-storage: "4Gi"
 ---
 apiVersion: v1
 kind: Service
