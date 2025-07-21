@@ -27,11 +27,11 @@ spec:
             - containerPort: 8069
           resources:
             limits:
-              cpu: "8"
-              memory: "8Gi"
+              cpu: "2"
+              memory: "4Gi"
               ephemeral-storage: "4Gi"
             requests:
-              cpu: "4"
+              cpu: "1"
               memory: "4Gi"
               ephemeral-storage: "4Gi"
           env:

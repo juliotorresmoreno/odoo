@@ -28,7 +28,7 @@ spec:
               memory: "8Gi"
               ephemeral-storage: "4Gi"
             requests:
-              cpu: "4"
+              cpu: "100m"
               memory: "4Gi"
               ephemeral-storage: "4Gi"
           env:

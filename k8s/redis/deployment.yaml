@@ -13,6 +13,10 @@ spec:
         app: redis
     spec:
       automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: redis
           image: redis:7.2-alpine
@@ -24,18 +28,6 @@ spec:
               memory: "8Gi"
               ephemeral-storage: "4Gi"
             requests:
-              cpu: "4"
+              cpu: "100m"
               memory: "4Gi"
               ephemeral-storage: "4Gi"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: redis
-spec:
-  selector:
-    app: redis
-  ports:
-    - protocol: TCP
-      port: 6379
-      targetPort: 6379
