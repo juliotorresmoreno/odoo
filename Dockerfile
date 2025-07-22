@@ -26,9 +26,7 @@ RUN apt-get update && apt dist-upgrade -y && apt-get install -y \
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
-RUN apt-get update && apt-get install -y \
-    postgresql-client-17 && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y postgresql-client-17 wkhtmltopdf && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /odoo
 WORKDIR /odoo
