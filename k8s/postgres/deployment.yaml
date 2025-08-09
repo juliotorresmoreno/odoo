@@ -12,11 +12,14 @@ spec:
       labels:
         app: postgres
     spec:
+      terminationGracePeriodSeconds: 60
       automountServiceAccountToken: false
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      nodeSelector:
+        kubernetes.io/hostname: juliotorres-pc
       containers:
         - name: postgres
           image: postgres:17
@@ -45,4 +48,4 @@ spec:
       volumes:
         - name: db-data
           persistentVolumeClaim:
-            claimName: db-data
+            claimName: db-data-local-pvc
