@@ -4410,8 +4410,8 @@ msgstr "穩定的表現及正常運行時間，確保高效、可靠的服務，
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_res_config_settings__has_google_search_console
-msgid "Console Google Search"
-msgstr "控制台 Google 搜尋"
+msgid "Google Search Console"
+msgstr "Google 搜尋控制台"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_landing_s_features
@@ -7129,8 +7129,8 @@ msgstr "Google 地圖 API 密鑰"
 #. module: website
 #: model:ir.model.fields,field_description:website.field_res_config_settings__google_search_console
 #: model:ir.model.fields,field_description:website.field_website__google_search_console
-msgid "Google Search Console"
-msgstr "Google 搜尋控制台"
+msgid "Google Search Console Key"
+msgstr ""
 
 #. module: website
 #: model:ir.model.fields,help:website.field_res_config_settings__google_search_console
@@ -8021,7 +8021,7 @@ msgstr "指示器在外"
 #: model_terms:ir.ui.view,arch_db:website.s_badge_options
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Info"
-msgstr "詳細資訊"
+msgstr "資訊"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -9003,7 +9003,7 @@ msgstr "圖書館"
 #: model_terms:ir.ui.view,arch_db:website.s_badge_options
 #: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
 msgid "Light"
-msgstr "Light"
+msgstr "淺色"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -9368,7 +9368,7 @@ msgstr "地中海自助餐，包括前菜、主菜和甜品"
 #: model_terms:ir.ui.view,arch_db:website.s_rating_options
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Medium"
-msgstr "媒介"
+msgstr "中"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.new_page_template_about_full_1_s_text_block_h2

@@ -4328,10 +4328,6 @@ msgid ""
 "accordance with their internal legislation. Any withholding at source will "
 "be paid by the client to the tax authorities. Under no circumstances can"
 msgstr ""
-"Некоторые страны в соответствии со своим внутренним законодательством "
-"удерживают налог у источника на сумму счетов-фактур. Любые удержания у "
-"источника выплачиваются клиентом налоговым органам. Ни при каких "
-"обстоятельствах"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_secure_entries_wizard__chains_to_hash_with_gaps
@@ -5184,7 +5180,7 @@ msgid ""
 "Create as many ledger groups as needed to maintain separate ledgers for local GAAP, IFRS, or fiscal\n"
 "                    adjustments, ensuring compliance with diverse regulations."
 msgstr ""
-"Создавайте столько групп журналов, сколько необходимо для ведения отдельных журналов по местным GAAP, IFRS или налоговым\n"
+"Создавайте столько групп журналов, сколько необходимо для ведения отдельных журналов согласно местным GAAP, IFRS или налоговым\n"
 "                    корректировкам, обеспечивая соответствие различным нормативам."
 
 #. module: account

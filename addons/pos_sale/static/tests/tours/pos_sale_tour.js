@@ -469,3 +469,47 @@ registry.category("web_tour.tours").add("test_quantity_updated_settle", {
             }),
         ].flat(),
 });
+
+registry.category("web_tour.tours").add("test_sale_order_fp_different_from_partner_one", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+            PosSale.settleSaleOrderByPrice("20.00"),
+            ProductScreen.checkTaxAmount("10.00"),
+            ProductScreen.checkFiscalPosition("Partner FP"),
+            ProductScreen.clickPayButton(),
+            PaymentScreen.clickPaymentMethod("Bank"),
+            PaymentScreen.clickValidate(),
+            ReceiptScreen.receiptIsThere(),
+            ReceiptScreen.clickNextOrder(),
+            PosSale.settleSaleOrderByPrice("10.00"),
+            ProductScreen.checkTaxAmount("0.00"),
+            ProductScreen.checkFiscalPosition("Sale Order FP"),
+            ProductScreen.clickPayButton(),
+            PaymentScreen.clickPaymentMethod("Bank"),
+            PaymentScreen.clickValidate(),
+            ReceiptScreen.receiptIsThere(),
+            ReceiptScreen.clickNextOrder(),
+        ].flat(),
+});
+
+registry.category("web_tour.tours").add("test_multiple_lots_sale_order", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+            PosSale.settleNthOrder(1, { loadSN: true }),
+            PosSale.selectedOrderLinesHasLots("Product", ["1002"]),
+            Utils.negateStep(...PosSale.selectedOrderLinesHasLots("Product", ["1001"])),
+            ProductScreen.selectedOrderlineHas("Product", "2.00"),
+            ProductScreen.clickOrderline("Product", "1"),
+            PosSale.selectedOrderLinesHasLots("Product", ["1001"]),
+            ProductScreen.selectedOrderlineHas("Product", "1.00"),
+            Utils.negateStep(...PosSale.selectedOrderLinesHasLots("Product", ["1002"])),
+            ProductScreen.clickPayButton(),
+            PaymentScreen.clickPaymentMethod("Bank"),
+            PaymentScreen.clickValidate(),
+            ReceiptScreen.isShown(),
+        ].flat(),
+});
