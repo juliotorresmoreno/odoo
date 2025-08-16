@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: odoo-admin
+  namespace: odoo
 spec:
   replicas: 1
   selector:
