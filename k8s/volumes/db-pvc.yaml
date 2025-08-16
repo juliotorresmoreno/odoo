@@ -20,6 +20,7 @@ spec:
           operator: In
           values:
             - juliotorres-pc
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
