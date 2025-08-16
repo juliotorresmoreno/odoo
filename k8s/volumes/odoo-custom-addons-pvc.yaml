@@ -1,4 +1,28 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-odoo-custom-addons
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/odoo-custom-addons
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+            - juliotorres-pc
+
+
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: odoo-custom-addons
@@ -8,4 +32,4 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  storageClassName: longhorn
+  storageClassName: local-storage
